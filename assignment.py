@@ -6,30 +6,75 @@ def read_line(filename, line_number):
         return ""
     file = open(filename, "r")
     line = ""
-    for i in range(1,line_number):
+    for i in range(line_number):
         line = file.readline()
+    file.close()
     if line == "":
         return ""
     else:
         return line.strip()
-    file.close()
 
 # Exercise 2
 def reverse_lines(source, destination):
-    # Write your code here
-    pass
+    file = open(source, "r")
+    lst = file.readlines()
+    file.close()
+    file = open(destination, "w")
+    s=0
+    for i in range (len(lst)-1,-1,-1):
+        file.write(f"{lst[i].strip()}\n")
+        s += 1
+    file.close()
+    return s
 
 # Exercise 3
 def merge_files(first, second, destination):
-    # Write your code here
-    pass
+    file1 = open(first, "r")
+    file2 = open(second, "r")
+    lst1 = file1.readlines()
+    lst2 = file2.readlines()
+    file1.close()
+    file2.close()
+    file = open(destination, "w")
+    s=0
+    for i in lst1:
+        file.write(f"{i.strip()}\n")
+        s += 1
+    for i in lst2:
+        file.write(f"{i.strip()}\n")
+        s += 1
+    file.close()
+    return s
 
 # Exercise 4
 def find_score(filename, name):
-    # Write your code here
-    pass
-
+    file = open(filename, "r")
+    lst = file.readlines()
+    for i in lst:
+        parts = i.strip().split(",")
+        if(parts[0] == name):
+            file.close()
+            return int(parts[1])
+    file.close()
+    return -1
 # Exercise 5
 def update_score(filename, name, new_score):
-    # Write your code here
-    pass
+    file = open(filename, "r")
+    lst = file.readlines()
+    file.close()
+    find = False
+    for i in lst:
+        parts = i.strip().split(",")
+        if(parts[0] == name):
+            find = True
+    if (find):
+        file = open(filename, "w")
+        for i in lst:
+            parts = i.strip().split(",")
+            if(parts[0] == name):
+                file.write(f"{name},{new_score}\n")
+            else:
+                file.write(f"{i.strip()}\n")
+        return True
+    else:
+        return False
