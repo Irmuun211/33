@@ -6,12 +6,12 @@ def read_line(filename, line_number):
         return ""
     file = open(filename, "r")
     line = ""
-    for i in range(line_number):
+    for i in range(1,line_number):
         line = file.readline()
     if line == "":
         return ""
     else:
-        return line
+        return line.strip()
     file.close()
 
 # Exercise 2
